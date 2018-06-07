@@ -413,7 +413,11 @@ Router::map(['GET', 'POST'], 'posts/list', function () {
 
 ### Middleware
 
-_TODO: If you'd like to know more about this, please add an issue._
+{% hint style="info" %}
+ _TODO: If you'd like to know more about this, please add an issue._
+{% endhint %}
+
+Once yo
 
 #### Route based middleware
 
