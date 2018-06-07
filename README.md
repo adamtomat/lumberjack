@@ -1,4 +1,5 @@
-# Lumberjack
+# README
+
 A framework for making WordPress theme development more sane & easier to maintain.
 
 The framework has been designed to be as un-intrusive as possible and you're free to use as little or as much of it as you'd like.
@@ -6,30 +7,33 @@ The framework has been designed to be as un-intrusive as possible and you're fre
 Written & maintained by the team at [Rareloop](https://www.rareloop.com).
 
 ## Features
-- Configuration
-- Post Types
-- WordPress Controllers
-- Router
-  - Middleware (PSR15)
-- HTTP Request/Response Messages (PSR7)
-- Logging (PSR3)
-- Exceptions
-- Dependency Injection Container (PSR11)
-- Service Providers
-- Facades
+
+* [Configuration](./#configuration)
+* [Post Types](./#post-types)
+* [WordPress Controllers](./#wordpress-controllers)
+* [Router](./#router)
+  * [Middleware \(PSR15\)](./#middleware)
+* [HTTP Request/Response Messages \(PSR7\)](./#http-request-response-messages)
+* [Logging \(PSR3\)](./#logging-psr-3)
+* [Exceptions](./#exceptions)
+* [Dependency Injection Container \(PSR11\)](./#dependency-injection-container)
+* [Service Providers](./#service-providers)
+* [Facades](./#facades)
 
 ## Requirements
-- PHP >=7.0
-- Installation via Composer (e.g. Bedrock)
+
+* PHP &gt;=7.0
+* Installation via Composer \(e.g. Bedrock\)
 
 ## Installing
-This repository is a starter theme. To get started you should **download this and add it to your `themes/` directory**.
 
-_(Note: Currently using a child-theme to extend this theme is unsupported.)_
+This repository is a starter theme. To get started you should **download this and add it to your** `themes/` **directory**.
+
+_\(Note: Currently using a child-theme to extend this theme is unsupported.\)_
 
 The theme depends on the core Lumberjack framework. Install this via composer, like so:
 
-```shell
+```text
 composer require rareloop/lumberjack-core
 ```
 
@@ -101,7 +105,6 @@ $collection = Post::query($wpQueryArray);
 ```
 
 This becomes especially powerful when you start registering **Custom Post Types**.
-
 
 ```php
 use App\PostTypes\Product;
@@ -185,10 +188,10 @@ class Product extends Post
 }
 ```
 
-Lumberjack will handle the registering of the post type for you. In order to do that, it requires 2 methods (documented above):
+Lumberjack will handle the registering of the post type for you. In order to do that, it requires 2 methods \(documented above\):
 
-- `getPostType()`
-- `getPostTypeConfig()`
+* `getPostType()`
+* `getPostTypeConfig()`
 
 In order for Lumberjack to register your post type, you need to add the class name to the `config/posttypes.php` config file.
 
@@ -237,7 +240,7 @@ $products = Product::query(['s' => 'Toy Car']);
 
 ## WordPress Controllers
 
-In the files (i.e. controllers) that WordPress uses when it matches a route (e.g. `page.php`, `single.php`), you can now use a class rather than writing procedural code.
+In the files \(i.e. controllers\) that WordPress uses when it matches a route \(e.g. `page.php`, `single.php`\), you can now use a class rather than writing procedural code.
 
 ```php
 // page-home.php
@@ -267,8 +270,8 @@ class PageHomeController
 
 **The name of the controller is important:**
 
-- It should be under the namespace `App`.
-- The class name must be an UpperCamelCase version of the filename with the word `Controller` on the end (without spaces, dashes and underscores). If the controller name is not correctly Lumberjack will not throw any errors - instead you will just get a blank page.
+* It should be under the namespace `App`.
+* The class name must be an UpperCamelCase version of the filename with the word `Controller` on the end \(without spaces, dashes and underscores\). If the controller name is not correctly Lumberjack will not throw any errors - instead you will just get a blank page.
 
 The `handle` method will automatically be called on your controller.
 
@@ -310,7 +313,7 @@ Note: Route closures and controller functions are automatically dependency injec
 
 ### Creating Routes
 
-Typically, you only need to allow one HTTP verb for a route (e.g. `POST` or `GET`). To create a route, use the HTTP verb as the method name. The first parameter is the URI and the second is the code you wish to execute when that route is matched.
+Typically, you only need to allow one HTTP verb for a route \(e.g. `POST` or `GET`\). To create a route, use the HTTP verb as the method name. The first parameter is the URI and the second is the code you wish to execute when that route is matched.
 
 ```php
 Router::get('test/route', function () {});
@@ -322,6 +325,7 @@ Router::options('test/route', function () {});
 ```
 
 #### Route Parameters
+
 Parameters can be defined on routes using the `{keyName}` syntax. When a route matches that contains parameters, an instance of the `RouteParams` object is passed to the action.
 
 ```php
@@ -331,6 +335,7 @@ Router::get('posts/{id}', function(RouteParams $params) {
 ```
 
 #### Named Routes
+
 Routes can be named so that their URL can be generated programatically:
 
 ```php
@@ -348,6 +353,7 @@ $url = Router::url('posts.show', ['id' => 123]);
 ```
 
 ### Creating Groups
+
 It is common to group similar routes behind a common prefix. This can be achieved using Route Groups:
 
 ```php
@@ -358,6 +364,7 @@ Router::group('prefix', function ($group) {
 ```
 
 ### Route Controllers
+
 If you'd rather use a class to group related route actions together you can pass a Controller String instead of a closure.
 
 The string takes the format `{name of class}@{name of method}`. It is important that you use the complete namespace with the class name.
@@ -394,22 +401,24 @@ Router::map(['GET', 'POST'], 'posts/list', function () {
 
 `map()` takes 3 parameters:
 
-- `methods` (array): list of matching HTTP methods, valid values:
-    + `GET`
-    + `POST`
-    + `PUT`
-    + `PATCH`
-    + `DELETE`
-    + `OPTIONS`
-- `uri` (string): The URI to match against
-- `action`  (function|string): Either a closure or a Controller string
+* `methods` \(array\): list of matching HTTP methods, valid values:
+  * `GET`
+  * `POST`
+  * `PUT`
+  * `PATCH`
+  * `DELETE`
+  * `OPTIONS`
+* `uri` \(string\): The URI to match against
+* `action`  \(function\|string\): Either a closure or a Controller string
 
 ### Middleware
+
 _TODO: If you'd like to know more about this, please add an issue._
 
 #### Route based middleware
 
 #### Global middleware
+
 _TODO: If you'd like to know more about this, please add an issue._
 
 ## HTTP Request/Response Messages
@@ -467,16 +476,20 @@ $response = new Zend\Diactoros\Response\EmptyResponse(); // Basic 204 response:
 $response = new Zend\Diactoros\Response\RedirectResponse('/user/login');
 ```
 
-## Logging (PSR3)
+## Logging \(PSR3\)
+
 _TODO: If you'd like to know more about this, please add an issue_
 
 ## Exceptions
+
 _TODO: If you'd like to know more about this, please add an issue_
 
 ## Dependency Injection Container
+
 Lumberjack features a PSR11 compatible container, powered by the popular open source [PHPDI](http://php-di.org). If this is a new term for you checkout this [great intro](http://php-di.org/doc/understanding-di.html) and don't worry, you don't have to make use of it if you don't want to.
 
 #### Accessing the container
+
 In the default Lumberjack `functions.php` you'll find the following code:
 
 ```php
@@ -486,6 +499,7 @@ $app = new Application(__DIR__);
 This creates the Application and the `$app` variable becomes your reference to the container.
 
 ### Setting entries in the container
+
 To add something to the container you simply call `bind()`, e.g.:
 
 ```php
@@ -493,6 +507,7 @@ $app->bind('foo', 'bar');
 ```
 
 ### Retrieving entries from the container
+
 To retrieve an entry from the container you can use `get()`, e.g.:
 
 ```php
@@ -500,6 +515,7 @@ $foo = $app->get('foo');
 ```
 
 ### Use the container to create an object
+
 You can use the container to create an object from any class that your application can autoload using `make()`, e.g.:
 
 ```php
@@ -525,6 +541,7 @@ $comment = $app->make('\MyNamespace\Comment', [
 ```
 
 ### Set concrete implementations for interfaces
+
 You can also tell the container what concrete class to use when resolving a certain type hinted interface. This allows you to write your app code against contracts and then use the container to switch in the correct implementation at runtime.
 
 ```php
@@ -541,12 +558,15 @@ $gateway = $app->make('\MyNamespace\PaymentGateway');
 ```
 
 ## Service Providers
+
 _TODO: If you'd like to know more about this, please add an issue_
 
 ## Facades
+
 Lumberjack uses the [Blast Facades](https://github.com/phpthinktank/blast-facades) library.
 
 ### Creating a Facade
+
 Facades provide a simple static API to an object that has been registered into the container. For example to setup a facade you would first use a Service Provider to register an instance of your class into the container:
 
 ```php
@@ -580,3 +600,4 @@ class Log extends AbstractFacade
     }
 }
 ```
+
