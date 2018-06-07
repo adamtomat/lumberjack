@@ -417,17 +417,17 @@ Router::map(['GET', 'POST'], 'posts/list', function () {
  _TODO: If you'd like to know more about this, please add an issue._
 {% endhint %}
 
-Once yo
-
-#### Route based middleware
-
 #### Global middleware
 
-_TODO: If you'd like to know more about this, please add an issue._
+{% hint style="info" %}
+ _TODO: If you'd like to know more about this, please add an issue._
+{% endhint %}
 
 ## HTTP Request/Response Messages
 
-_TODO: Request documentation. If you'd like to know more about this, please add an issue._
+{% hint style="info" %}
+ _TODO: Document requests. f you'd like to know more about this, please add an issue._
+{% endhint %}
 
 All of your WordPress and Router controllers should return PSR7 compliant response. The most common use-case is rendering a `twig` view and passing in some context. Using Timber it would look like this:
 
@@ -482,11 +482,15 @@ $response = new Zend\Diactoros\Response\RedirectResponse('/user/login');
 
 ## Logging \(PSR3\)
 
-_TODO: If you'd like to know more about this, please add an issue_
+{% hint style="info" %}
+ _TODO: If you'd like to know more about this, please add an issue._
+{% endhint %}
 
 ## Exceptions
 
-_TODO: If you'd like to know more about this, please add an issue_
+{% hint style="info" %}
+ _TODO: If you'd like to know more about this, please add an issue._
+{% endhint %}
 
 ## Dependency Injection Container
 
@@ -563,7 +567,9 @@ $gateway = $app->make('\MyNamespace\PaymentGateway');
 
 ## Service Providers
 
-_TODO: If you'd like to know more about this, please add an issue_
+{% hint style="info" %}
+ _TODO: If you'd like to know more about this, please add an issue._
+{% endhint %}
 
 ## Facades
 
